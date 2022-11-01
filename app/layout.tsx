@@ -1,8 +1,16 @@
 import { use } from "react";
-import Footer from "../components/footer";
-import Header from "../components/header";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 import "./globals.css";
 
+interface MetaData {
+  metaTitle: string;
+  metaDescription: string;
+  keywords: string;
+  metaImage: any;
+}
+
+// TODO: add type schema for CMS response
 async function getData() {
   const qs = require("qs");
   const query = qs.stringify(
@@ -27,10 +35,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const homePageMeta = use(getData());
-  const { metaTitle, metaDescription, keywords, metaImage } =
+  const { metaTitle, metaDescription, keywords, metaImage }: MetaData =
     homePageMeta?.data[0]?.attributes?.seo;
   const imageUrl = `${process.env.NEXT_PUBLIC_STRAPI_URL}${metaImage.data.attributes.url}`;
 
+  // TODO: add meta to particular page
   return (
     <html lang="en">
       <head>
