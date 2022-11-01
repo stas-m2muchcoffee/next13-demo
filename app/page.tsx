@@ -41,8 +41,6 @@ export default function Home() {
   const { title, subtitle, buttonTitle, buttonPath, buttonColor }: HeaderImage =
     homePage?.data[0]?.attributes?.components[0];
 
-  // console.log(111, homePage?.data[0]?.attributes?.components[2]);
-
   const { Title: productCarouselTitle, products }: ProductCarousel =
     homePage?.data[0]?.attributes?.components[2];
 
