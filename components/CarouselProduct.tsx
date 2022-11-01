@@ -13,9 +13,15 @@ interface CarouselProductProps {
 const CarouselProduct = ({ id }: CarouselProductProps) => {
   const product = use(getData(id));
 
+  console.log(111, product.payload);
   return (
     <>
-      <li>{product.payload.Description}</li>
+      <li style={{ marginBottom: "20px" }}>
+        <div style={{ marginBottom: "5px" }}>
+          Desription: {product.payload.Description}
+        </div>
+        <div>Price: {product.payload.UnitPrice}</div>
+      </li>
     </>
   );
 };

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { use } from "react";
 import CarouselProduct from "../components/CarouselProduct";
 import styles from "./page.module.css";
 
@@ -36,8 +35,8 @@ async function getData() {
   return homePage;
 }
 
-export default function Home() {
-  const homePage = use(getData());
+export default async function Home() {
+  const homePage = await getData();
   const { title, subtitle, buttonTitle, buttonPath, buttonColor }: HeaderImage =
     homePage?.data[0]?.attributes?.components[0];
 
@@ -45,8 +44,8 @@ export default function Home() {
     homePage?.data[0]?.attributes?.components[2];
 
   return (
-    <>
-      <div style={{ marginBottom: "40px" }}>
+    <div style={{ padding: "0 30px" }}>
+      <div style={{ marginBottom: "60px", textAlign: "center" }}>
         <h1>{title}</h1>
         <h2>{subtitle}</h2>
         <Link href={buttonPath}>
@@ -56,6 +55,7 @@ export default function Home() {
               border: "solid 2px",
               display: "inline-block",
               backgroundColor: buttonColor,
+              borderRadius: "10px",
             }}
           >
             {buttonTitle}
@@ -70,6 +70,6 @@ export default function Home() {
           ))}
         </ul>
       </div>
-    </>
+    </div>
   );
 }

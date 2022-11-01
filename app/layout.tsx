@@ -1,6 +1,6 @@
-import { use } from "react";
-import Footer from "../components/footer";
-import Header from "../components/header";
+// import { use } from "react";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 import "./globals.css";
 
 interface MetaData {
@@ -29,12 +29,12 @@ async function getData() {
   return homePageMeta;
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const homePageMeta = use(getData());
+  const homePageMeta = await getData();
   const { metaTitle, metaDescription, keywords, metaImage }: MetaData =
     homePageMeta?.data[0]?.attributes?.seo;
   const imageUrl = `${process.env.NEXT_PUBLIC_STRAPI_URL}${metaImage.data.attributes.url}`;
