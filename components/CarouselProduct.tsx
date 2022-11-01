@@ -1,4 +1,5 @@
 import { use } from "react";
+import PriceContainer from "./PriceContainer";
 
 async function getData(id: string) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_ERATI_URL}/product/${id}`);
@@ -13,14 +14,17 @@ interface CarouselProductProps {
 const CarouselProduct = ({ id }: CarouselProductProps) => {
   const product = use(getData(id));
 
-  console.log(111, product.payload);
   return (
     <>
       <li style={{ marginBottom: "20px" }}>
         <div style={{ marginBottom: "5px" }}>
           Desription: {product.payload.Description}
         </div>
-        <div>Price: {product.payload.UnitPrice}</div>
+        <PriceContainer
+          publicPrice={product.payload.UnitPrice}
+          productId={product.payload.Id}
+        />
+        {/* <div>Price: {product.payload.UnitPrice}</div> */}
       </li>
     </>
   );

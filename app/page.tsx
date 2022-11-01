@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import CarouselProduct from "../components/CarouselProduct";
 import styles from "./page.module.css";
