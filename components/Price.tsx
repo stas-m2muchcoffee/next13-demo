@@ -1,15 +1,7 @@
 "use client";
 
-import { use } from "react";
-import { useAppDispatch, useAppSelector } from "../common/hooks";
-
-async function getData(token: string, productId: string) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_ERATI_URL}/product/prices/${productId}`
-  );
-  const price = await res.json();
-  return price;
-}
+import { useEffect, useState } from "react";
+import { useAppSelector } from "../common/hooks";
 
 interface PriceProps {
   publicPrice: string;
@@ -17,11 +9,45 @@ interface PriceProps {
 }
 
 const Price = ({ publicPrice, productId }: PriceProps) => {
+  const [price, setPrice] = useState();
   const token = useAppSelector((state) => state.auth.token);
-  const dispatch = useAppDispatch();
-  // const price = use(getData(token, productId));
 
-  return <div>Price: {token ? 555 : publicPrice}</div>;
+  useEffect(() => {
+    const getPrice = async () => {
+      if (token) {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_ERATI_URL}/products/prices/18200`,
+          {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const response = await res.json();
+        setPrice(response.payload[18200][1].Price);
+      }
+    };
+    getPrice();
+  }, [token]);
+
+  return (
+    <div style={{ display: "flex" }}>
+      Price:{" "}
+      {token ? (
+        <div style={{ display: "flex", marginLeft: "5px" }}>
+          <div style={{ textDecoration: "line-through", marginRight: "5px" }}>
+            {publicPrice}
+          </div>{" "}
+          {price}
+        </div>
+      ) : (
+        publicPrice
+      )}
+    </div>
+  );
 };
 
 export default Price;
