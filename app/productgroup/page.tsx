@@ -11,15 +11,19 @@ async function getData() {
 
 export default async function ProductGroupList() {
   const productgroup = await getData();
-  // console.log(111, productgroup.payload);
+
+  const template = productgroup.payload.Webpage.Template;
 
   return (
-    <Link
-      href={`/productgroup/${productgroup.payload.Id}-${productgroup.payload.Slug}`}
-    >
-      <div className={classes.container}>
-        <div className={classes.groupName}>{productgroup.payload.Name}</div>
-      </div>
-    </Link>
+    <>
+      <Link
+        href={`/productgroup/${productgroup.payload.Id}-${productgroup.payload.Slug}`}
+      >
+        <div className={classes.container}>
+          <div className={classes.groupName}>{productgroup.payload.Name}</div>
+        </div>
+      </Link>
+      <div dangerouslySetInnerHTML={{ __html: template }}></div>
+    </>
   );
 }
