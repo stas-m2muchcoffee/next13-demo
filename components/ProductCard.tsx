@@ -7,16 +7,23 @@ async function getData(id: string) {
   return product;
 }
 
-interface CarouselProductProps {
+interface ProductCardProps {
   id: string;
 }
 
-const CarouselProduct = ({ id }: CarouselProductProps) => {
+const ProductCard = ({ id }: ProductCardProps) => {
   const product = use(getData(id));
 
   return (
-    <>
-      <li style={{ marginBottom: "20px" }}>
+    <div>
+      <div
+        style={{
+          margin: "20px",
+          padding: "20px",
+          border: "solid",
+          width: "200px",
+        }}
+      >
         <div style={{ marginBottom: "5px" }}>
           Desription: {product.payload.Description}
         </div>
@@ -24,9 +31,9 @@ const CarouselProduct = ({ id }: CarouselProductProps) => {
           publicPrice={product.payload.UnitPrice}
           productId={product.payload.Id}
         />
-      </li>
-    </>
+      </div>
+    </div>
   );
 };
 
-export default CarouselProduct;
+export default ProductCard;

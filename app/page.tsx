@@ -69,6 +69,23 @@ export default async function Home() {
           ))}
         </ul>
       </div>
+      <Link href={"/productgroup"}>
+        <div
+          style={{
+            marginLeft: "20px",
+            padding: "10px 30px",
+            backgroundColor: "lightcoral",
+            border: "solid",
+            borderRadius: "10px",
+            width: "200px",
+            textAlign: "center",
+            margin: "0 auto",
+            marginBottom: "20px",
+          }}
+        >
+          To productgroup
+        </div>
+      </Link>
     </div>
   );
 }

@@ -1,0 +1,11 @@
+.layout {
+  display: grid;
+  grid-template-columns: 25% 75%;
+}
+
+.sidebar {
+  height: 100vh;
+  padding: 0 2rem;
+  background-color: #c3bfc8;
+  border: solid 1px;
+}
