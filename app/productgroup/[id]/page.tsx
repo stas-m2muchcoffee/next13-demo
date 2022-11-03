@@ -17,10 +17,12 @@ interface ProductItem {
 export default async function ProductGroupPage({
   params,
 }: {
-  params: { slug: string };
+  params: { id: string };
 }) {
-  const parseId = params.slug.split("-")[0];
-  const productgroup = await getData(parseId);
+  // const parseId = params.slug.split("-")[0];
+  console.log(111, params.id);
+
+  const productgroup = await getData(params.id);
   const products: ProductItem[] = productgroup.payload.ProductGroupProducts;
 
   return (
@@ -30,4 +32,18 @@ export default async function ProductGroupPage({
       })}
     </div>
   );
+}
+
+export async function generateStaticParams() {
+  const productgroupResponse = await fetch(
+    `${process.env.NEXT_PUBLIC_ERATI_URL}/productgroup/860`
+  );
+
+  const productgroup = await productgroupResponse.json();
+
+  const products: ProductItem[] = productgroup.payload.ProductGroupProducts;
+
+  return products.map((product) => ({
+    id: String(product.Id),
+  }));
 }
