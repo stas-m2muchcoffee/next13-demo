@@ -2,7 +2,12 @@ import { use } from "react";
 import PriceContainer from "./PriceContainer";
 
 async function getData(id: string) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_ERATI_URL}/product/${id}`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_ERATI_URL}/product/${id}`,
+    {
+      cache: "force-cache",
+    }
+  );
   const product = await res.json();
   return product;
 }

@@ -13,9 +13,9 @@ interface PriceContainerProps {
 const PriceContainer = ({ publicPrice, productId }: PriceContainerProps) => {
   return (
     <Provider store={store}>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Price publicPrice={publicPrice} productId={productId} />
-      </Suspense>
+      {/* <Suspense fallback={<div>Loading...</div>}> */}
+      <Price publicPrice={publicPrice} productId={productId} />
+      {/* </Suspense> */}
     </Provider>
   );
 };
