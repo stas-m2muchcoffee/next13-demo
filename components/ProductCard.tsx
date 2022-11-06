@@ -9,13 +9,15 @@ async function getData(id: string) {
 
 interface ProductCardProps {
   id: string;
+  description: string;
+  unitPrice: string;
 }
 
-const ProductCard = ({ id }: ProductCardProps) => {
-  const product = use(getData(id));
+const ProductCard = ({ id, description, unitPrice }: ProductCardProps) => {
+  // const filteringProduct = use(getData(id));
 
   return (
-    <div>
+    <div key={id}>
       <div
         style={{
           margin: "20px",
@@ -24,13 +26,8 @@ const ProductCard = ({ id }: ProductCardProps) => {
           width: "200px",
         }}
       >
-        <div style={{ marginBottom: "5px" }}>
-          Desription: {product.payload.Description}
-        </div>
-        <PriceContainer
-          publicPrice={product.payload.UnitPrice}
-          productId={product.payload.Id}
-        />
+        <div style={{ marginBottom: "5px" }}>Desription: {description}</div>
+        <PriceContainer publicPrice={unitPrice} productId={id} />
       </div>
     </div>
   );

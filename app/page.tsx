@@ -66,6 +66,7 @@ export default async function Home() {
 
   const { groups }: ProductgroupCarousel =
     homePage?.data[0]?.attributes?.components[3];
+  groups.push("663");
 
   return (
     <div style={{ padding: "0 30px" }}>

@@ -1,5 +1,5 @@
 const ProductsFilter = () => {
-  return <div>this is filter</div>;
+  return <div></div>;
 };
 
 export default ProductsFilter;

@@ -1,4 +1,8 @@
 // import { Suspense } from "react";
+import ProductCard from "../../../components/ProductCard";
+
+import PriceContainer from "../../../components/PriceContainer";
+import Products from "../../../components/Products";
 // import ProductCard from "../../../components/ProductCard";
 
 async function getGroupData(id: string) {
@@ -33,15 +37,15 @@ async function getHomePageData() {
   return homePage;
 }
 
-async function getProductGroupData(groupId: string) {
+async function getProductsData(groupId: string) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_ERATI_URL}/productgroup/${groupId}`
+    `${process.env.NEXT_PUBLIC_ERATI_URL}/productgroup/${groupId}/products`
     // {
     //   cache: "force-cache",
     // }
   );
-  const productgroup = await res.json();
-  return productgroup;
+  const products = await res.json();
+  return products;
 }
 
 // export async function generateStaticParams({ params }: any) {
@@ -76,24 +80,26 @@ export default async function ProductGroupPage({
 }: {
   params: { id: string };
 }) {
-  // const parseId = params.slug.split("-")[0];
-  // console.log(111, params.id);
+  const productsData = await getProductsData(params.id);
+  const products = productsData?.payload?.results;
 
-  const productgroup = await getGroupData(params.id);
-  const products: ProductItem[] = productgroup?.payload?.ProductGroupProducts;
-  // const product = await getData(params?.id);
+  // console.log(111, products.payload.results);
+
+  // const products: ProductItem[] = productgroup?.payload?.ProductGroupProducts;
 
   return (
     <div style={{ display: "flex", flexWrap: "wrap" }}>
-      {/* {params?.id} */}
-      {products?.map((product) => {
+      <Products productsData={products} />
+      {/* {products.map((product: any) => {
         return (
-          <div key={product.Id} style={{ margin: "10px" }}>
-            {product.Id}
-          </div>
+          <ProductCard
+            id={product.Id}
+            description={product.Description}
+            unitPrice={product.UsnitPrice}
+            key={product.Id}
+          />
         );
-        // <ProductCard id={product.Id} key={product.Id}></ProductCard>;
-      })}
+      })} */}
     </div>
   );
 }
@@ -103,6 +109,7 @@ export async function generateStaticParams() {
 
   const { groups }: { groups: string[] } =
     homePage?.data[0]?.attributes?.components[3];
+  groups.push("663");
 
   return groups?.map((groupId) => ({
     id: String(groupId),
