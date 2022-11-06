@@ -14,8 +14,6 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ id, description, unitPrice }: ProductCardProps) => {
-  // const filteringProduct = use(getData(id));
-
   return (
     <div key={id}>
       <div

@@ -39,7 +39,7 @@ const Products = ({ productsData }: any) => {
           <ProductCard
             id={product.Id}
             description={product.Description}
-            unitPrice={product.UsnitPrice}
+            unitPrice={product.UnitPrice}
             key={product.Id}
           />
         );
